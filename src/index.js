@@ -1,6 +1,9 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
+import { ScoreTally } from './scoreTally.js';
+import { PlayerScore } from './PlayerScore.js';
+import { changePlayerTurn } from './changePlayerTurn.js';
 
 
 // UI Logic
