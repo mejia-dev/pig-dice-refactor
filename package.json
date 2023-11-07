@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode=development",
     "start": "webpack-dev-server --open --mode=development",
-    "lint": "eslint src --ext .js"
+    "lint": "eslint src --ext .js",
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",
