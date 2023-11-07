@@ -1,9 +1,9 @@
 export function changePlayerTurn() {
   event.preventDefault();
-  checkGameMode()
-  showGame()
-  hideGameOptionsDiv()
-  displayScores()
+  checkGameMode();
+  showGame();
+  hideGameOptionsDiv();
+  displayScores();
   turnTotal = 0;
   if (currentTurn === 1) {
     currentTurn = 2;

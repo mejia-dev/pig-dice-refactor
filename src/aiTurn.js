@@ -8,7 +8,7 @@ export function aiTurn() {
         holdDice();
       } else {
         turnTotal += diceRollTotal;
-        diceRollTotal = rollDice(currentTurn)
+        diceRollTotal = rollDice(currentTurn);
         displayRolledNumber(diceRollTotal, 0);
         if (diceRollTotal === "nothing") {
           turnTotal = 0;

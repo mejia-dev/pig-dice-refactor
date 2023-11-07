@@ -1,6 +1,6 @@
 export function holdDice() {
   event.preventDefault();
-  gameScoreTally.scores[currentTurn].addScore(turnTotal)
+  gameScoreTally.scores[currentTurn].addScore(turnTotal);
   if (turnTotal != 0) {
     hideRolledMessages();
   }
