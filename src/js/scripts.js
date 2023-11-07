@@ -1,286 +1,286 @@
-// Business Logic for ScoreTally constructor
+// // Business Logic for ScoreTally constructor
 
-function ScoreTally() {
-  this.scores = {};
-}
+// function ScoreTally() {
+//   this.scores = {};
+// }
 
-ScoreTally.prototype.trackScore = function (playerScore) {
-  this.scores[playerScore.playerNumber] = playerScore;
-}
+// ScoreTally.prototype.trackScore = function (playerScore) {
+//   this.scores[playerScore.playerNumber] = playerScore;
+// }
 
-// Business Logic for PlayerScore constructor
+// // Business Logic for PlayerScore constructor
 
-function PlayerScore(playerNumber, currentScore) {
-  this.playerNumber = playerNumber;
-  this.currentScore = currentScore;
-}
+// function PlayerScore(playerNumber, currentScore) {
+//   this.playerNumber = playerNumber;
+//   this.currentScore = currentScore;
+// }
 
-PlayerScore.prototype.addScore = function (input) {
-  this.currentScore += input;
-}
-
-
-
-// Global Business Logic
-function changePlayerTurn() {
-  event.preventDefault();
-  checkGameMode()
-  showGame()
-  hideGameOptionsDiv()
-  displayScores()
-  turnTotal = 0;
-  if (currentTurn === 1) {
-    currentTurn = 2;
-    if (aiMode != 0) {
-      displayGameButtons(false);
-      aiTurn();
-    }
-    displayCurrentPlayerTurn();
-    return;
-  } else {
-    currentTurn = 1;
-    displayGameButtons(true);
-    displayCurrentPlayerTurn();
-    return;
-  }
-}
-
-function rollDice() {
-  event.preventDefault();
-  let diceRoll = Math.floor(Math.random() * 6) + 1;
-  if (diceRoll === 1) {
-    return "nothing"
-  } else if (diceRoll > 1) {
-    return diceRoll;
-  }
-}
-
-function holdDice() {
-  event.preventDefault();
-  gameScoreTally.scores[currentTurn].addScore(turnTotal)
-  if (turnTotal != 0) {
-    hideRolledMessages();
-  }
-  hideTurnMessages();
-  checkWinningConditions();
-}
-
-function resetScore() {
-  gameScoreTally.scores[currentTurn].currentScore = 0;
-  changePlayerTurn();
-}
-
-function checkWinningConditions() {
-  let winMessageHolder = document.getElementById("winMessage");
-  if (aiMode === 0) {
-    if (gameMode === 0) {
-      if (gameScoreTally.scores[currentTurn].currentScore >= 100) {
-        winMessageHolder.setAttribute("class", "green")
-        winMessageHolder.innerText = "Player " + currentTurn + " wins!";
-        displayGameButtons(false);
-        displayScores()
-      } else {
-        changePlayerTurn();
-      }
-    } else if (gameMode === 1) {
-      if (gameScoreTally.scores[currentTurn].currentScore >= 200) {
-        winMessageHolder.setAttribute("class", "green")
-        winMessageHolder.innerText = "Player " + currentTurn + " wins!";
-        displayGameButtons(false);
-        displayScores();
-      } else {
-        changePlayerTurn();
-      }
-    }
-  } else {
-    if (gameMode === 0) {
-      if (gameScoreTally.scores[currentTurn].currentScore >= 100) {
-        if (currentTurn === 1) {
-          winMessageHolder.setAttribute("class", "green")
-          winMessageHolder.innerText = "Player wins!";
-          displayGameButtons(false);
-          displayScores()
-        } else {
-          winMessageHolder.setAttribute("class", "red")
-          winMessageHolder.innerText = "AI wins!"
-          displayGameButtons(false);
-          displayScores()
-        }
-      } else {
-        changePlayerTurn();
-      }
-    } else if (gameMode === 1) {
-      if (gameScoreTally.scores[currentTurn].currentScore >= 200) {
-        if (currentTurn === 1) {
-          winMessageHolder.setAttribute("class", "green")
-          winMessageHolder.innerText = "Player wins!";
-          displayGameButtons(false);
-          displayScores();
-        } else {
-          winMessageHolder.setAttribute("class", "red")
-          winMessageHolder.innerText = "AI wins!"
-          displayGameButtons(false);
-          displayScores()
-        }
-      } else {
-        changePlayerTurn();
-      }
-    }
-  }
-}
-
-function checkGameMode() {
-  const gameModeSelected = document.querySelector("input[name='gameMode']:checked").value;
-  if (gameModeSelected === "normal") {
-    gameMode = 0;
-  } else if (gameModeSelected === "two-dice") {
-    gameMode = 1;
-  }
-}
-
-function playerTurn() {
-  event.preventDefault();
-  let diceRollTotal = rollDice(currentTurn);
-  if (gameMode === 0) {
-    displayRolledNumber(diceRollTotal, 0);
-    if (diceRollTotal === "nothing") {
-      turnTotal = 0;
-      holdDice();
-      return
-    }
-    turnTotal += diceRollTotal;
-    displayTurnTotal(turnTotal);
-  } else if (gameMode === 1) {
-    let diceRollTotalB = rollDice(currentTurn);
-    displayRolledNumber(diceRollTotal, diceRollTotalB);
-    if (diceRollTotal === "nothing" && diceRollTotalB === "nothing") {
-      resetScore();
-    } else if (diceRollTotal === "nothing" || diceRollTotalB === "nothing") {
-      turnTotal = 0;
-      holdDice();
-      return
-    } else {
-      turnTotal += diceRollTotal + diceRollTotalB;
-      displayTurnTotal(turnTotal);
-    }
-  }
-}
+// PlayerScore.prototype.addScore = function (input) {
+//   this.currentScore += input;
+// }
 
 
 
-// AI-Specific Business Logic
+// // Global Business Logic
+// function changePlayerTurn() {
+//   event.preventDefault();
+//   checkGameMode()
+//   showGame()
+//   hideGameOptionsDiv()
+//   displayScores()
+//   turnTotal = 0;
+//   if (currentTurn === 1) {
+//     currentTurn = 2;
+//     if (aiMode != 0) {
+//       displayGameButtons(false);
+//       aiTurn();
+//     }
+//     displayCurrentPlayerTurn();
+//     return;
+//   } else {
+//     currentTurn = 1;
+//     displayGameButtons(true);
+//     displayCurrentPlayerTurn();
+//     return;
+//   }
+// }
 
-function setAiMode() {
-  event.preventDefault();
-  mode = event.target.id
-  if (mode === "playWithHardAi") {
-    aiMode = 2;
-  } else {
-    aiMode = 1;
-  }
-  changePlayerTurn();
-}
+// function rollDice() {
+//   event.preventDefault();
+//   let diceRoll = Math.floor(Math.random() * 6) + 1;
+//   if (diceRoll === 1) {
+//     return "nothing"
+//   } else if (diceRoll > 1) {
+//     return diceRoll;
+//   }
+// }
 
-function aiTurn() {
-  if (aiMode === 1) {
-    if (gameMode === 0) {
-      let diceRollTotal = rollDice(currentTurn);
-      displayRolledNumber(diceRollTotal, 0);
-      if (diceRollTotal === "nothing") {
-        turnTotal = 0;
-        holdDice();
-      } else {
-        turnTotal += diceRollTotal;
-        diceRollTotal = rollDice(currentTurn)
-        displayRolledNumber(diceRollTotal, 0);
-        if (diceRollTotal === "nothing") {
-          turnTotal = 0;
-          holdDice();
-        } else {
-          turnTotal += diceRollTotal;
-          holdDice();
-        }
-      }
-    } else if (gameMode === 1) {
-      let diceRollTotal = rollDice(currentTurn);
-      let diceRollTotalB = rollDice(currentTurn);
-      displayRolledNumber(diceRollTotal, diceRollTotalB);
-      if (diceRollTotal === "nothing" && diceRollTotalB === "nothing") {
-        resetScore();
-      } else if (diceRollTotal === "nothing" || diceRollTotalB === "nothing") {
-        turnTotal = 0;
-        holdDice();
-        return;
-      } else {
-        turnTotal += diceRollTotal + diceRollTotalB;
-        diceRollTotal = rollDice(currentTurn);
-        diceRollTotalB = rollDice(currentTurn);
-        displayRolledNumber(diceRollTotal, diceRollTotalB);
-        if (diceRollTotal === "nothing" && diceRollTotalB === "nothing") {
-          resetScore();
-        } else if (diceRollTotal === "nothing" || diceRollTotalB === "nothing") {
-          turnTotal = 0;
-          holdDice();
-          return;
-        } else {
-          turnTotal += diceRollTotal + diceRollTotalB;
-          holdDice();
-        }
-      }
-    }
-  }
-  else {
-    if (gameMode === 0) {
-      let diceRollTotal = rollDice(currentTurn);
-      displayRolledNumber(diceRollTotal, 0);
-      for (diceRollTotal = 0; diceRollTotal < 16; diceRollTotal) {
-        let currentRollTotal = rollDice(currentTurn);
-        displayRolledNumber(currentRollTotal, 0);
-        if (currentRollTotal === "nothing") {
-          turnTotal = 0;
-          holdDice();
-          return;
-        } else {
-          diceRollTotal += currentRollTotal;
-          turnTotal = diceRollTotal;
-        }
-      }
-      holdDice();
-    } else if (gameMode === 1) {
-      for (combinedDiceTotal = 0; combinedDiceTotal < 23; combinedDiceTotal) {
-        let currentRollTotalA = rollDice(currentTurn);
-        let currentRollTotalB = rollDice(currentTurn);
-        displayRolledNumber(currentRollTotalA, currentRollTotalB);
-        if (currentRollTotalA === "nothing" && currentRollTotalB === "nothing") {
-          resetScore();
-          return;
-        } else if (currentRollTotalA === "nothing" || currentRollTotalB === "nothing") {
-          turnTotal = 0;
-          holdDice();
-          return;
-        } else {
-          combinedDiceTotal += currentRollTotalA + currentRollTotalB;
-          turnTotal = combinedDiceTotal;
-        }
-      }
-      holdDice();
-    }
-  }
-}
+// function holdDice() {
+//   event.preventDefault();
+//   gameScoreTally.scores[currentTurn].addScore(turnTotal)
+//   if (turnTotal != 0) {
+//     hideRolledMessages();
+//   }
+//   hideTurnMessages();
+//   checkWinningConditions();
+// }
+
+// function resetScore() {
+//   gameScoreTally.scores[currentTurn].currentScore = 0;
+//   changePlayerTurn();
+// }
+
+// function checkWinningConditions() {
+//   let winMessageHolder = document.getElementById("winMessage");
+//   if (aiMode === 0) {
+//     if (gameMode === 0) {
+//       if (gameScoreTally.scores[currentTurn].currentScore >= 100) {
+//         winMessageHolder.setAttribute("class", "green")
+//         winMessageHolder.innerText = "Player " + currentTurn + " wins!";
+//         displayGameButtons(false);
+//         displayScores()
+//       } else {
+//         changePlayerTurn();
+//       }
+//     } else if (gameMode === 1) {
+//       if (gameScoreTally.scores[currentTurn].currentScore >= 200) {
+//         winMessageHolder.setAttribute("class", "green")
+//         winMessageHolder.innerText = "Player " + currentTurn + " wins!";
+//         displayGameButtons(false);
+//         displayScores();
+//       } else {
+//         changePlayerTurn();
+//       }
+//     }
+//   } else {
+//     if (gameMode === 0) {
+//       if (gameScoreTally.scores[currentTurn].currentScore >= 100) {
+//         if (currentTurn === 1) {
+//           winMessageHolder.setAttribute("class", "green")
+//           winMessageHolder.innerText = "Player wins!";
+//           displayGameButtons(false);
+//           displayScores()
+//         } else {
+//           winMessageHolder.setAttribute("class", "red")
+//           winMessageHolder.innerText = "AI wins!"
+//           displayGameButtons(false);
+//           displayScores()
+//         }
+//       } else {
+//         changePlayerTurn();
+//       }
+//     } else if (gameMode === 1) {
+//       if (gameScoreTally.scores[currentTurn].currentScore >= 200) {
+//         if (currentTurn === 1) {
+//           winMessageHolder.setAttribute("class", "green")
+//           winMessageHolder.innerText = "Player wins!";
+//           displayGameButtons(false);
+//           displayScores();
+//         } else {
+//           winMessageHolder.setAttribute("class", "red")
+//           winMessageHolder.innerText = "AI wins!"
+//           displayGameButtons(false);
+//           displayScores()
+//         }
+//       } else {
+//         changePlayerTurn();
+//       }
+//     }
+//   }
+// }
+
+// function checkGameMode() {
+//   const gameModeSelected = document.querySelector("input[name='gameMode']:checked").value;
+//   if (gameModeSelected === "normal") {
+//     gameMode = 0;
+//   } else if (gameModeSelected === "two-dice") {
+//     gameMode = 1;
+//   }
+// }
+
+// function playerTurn() {
+//   event.preventDefault();
+//   let diceRollTotal = rollDice(currentTurn);
+//   if (gameMode === 0) {
+//     displayRolledNumber(diceRollTotal, 0);
+//     if (diceRollTotal === "nothing") {
+//       turnTotal = 0;
+//       holdDice();
+//       return
+//     }
+//     turnTotal += diceRollTotal;
+//     displayTurnTotal(turnTotal);
+//   } else if (gameMode === 1) {
+//     let diceRollTotalB = rollDice(currentTurn);
+//     displayRolledNumber(diceRollTotal, diceRollTotalB);
+//     if (diceRollTotal === "nothing" && diceRollTotalB === "nothing") {
+//       resetScore();
+//     } else if (diceRollTotal === "nothing" || diceRollTotalB === "nothing") {
+//       turnTotal = 0;
+//       holdDice();
+//       return
+//     } else {
+//       turnTotal += diceRollTotal + diceRollTotalB;
+//       displayTurnTotal(turnTotal);
+//     }
+//   }
+// }
 
 
 
-// Define Global Variables
+// // AI-Specific Business Logic
 
-let gameScoreTally = new ScoreTally;
-let p1Score = new PlayerScore(1, 0)
-let p2Score = new PlayerScore(2, 0)
-gameScoreTally.trackScore(p1Score);
-gameScoreTally.trackScore(p2Score);
-let currentTurn = 2;
-let turnTotal = 0;
-let aiMode = 0;
-let gameMode = 0;
+// function setAiMode() {
+//   event.preventDefault();
+//   mode = event.target.id
+//   if (mode === "playWithHardAi") {
+//     aiMode = 2;
+//   } else {
+//     aiMode = 1;
+//   }
+//   changePlayerTurn();
+// }
+
+// function aiTurn() {
+//   if (aiMode === 1) {
+//     if (gameMode === 0) {
+//       let diceRollTotal = rollDice(currentTurn);
+//       displayRolledNumber(diceRollTotal, 0);
+//       if (diceRollTotal === "nothing") {
+//         turnTotal = 0;
+//         holdDice();
+//       } else {
+//         turnTotal += diceRollTotal;
+//         diceRollTotal = rollDice(currentTurn)
+//         displayRolledNumber(diceRollTotal, 0);
+//         if (diceRollTotal === "nothing") {
+//           turnTotal = 0;
+//           holdDice();
+//         } else {
+//           turnTotal += diceRollTotal;
+//           holdDice();
+//         }
+//       }
+//     } else if (gameMode === 1) {
+//       let diceRollTotal = rollDice(currentTurn);
+//       let diceRollTotalB = rollDice(currentTurn);
+//       displayRolledNumber(diceRollTotal, diceRollTotalB);
+//       if (diceRollTotal === "nothing" && diceRollTotalB === "nothing") {
+//         resetScore();
+//       } else if (diceRollTotal === "nothing" || diceRollTotalB === "nothing") {
+//         turnTotal = 0;
+//         holdDice();
+//         return;
+//       } else {
+//         turnTotal += diceRollTotal + diceRollTotalB;
+//         diceRollTotal = rollDice(currentTurn);
+//         diceRollTotalB = rollDice(currentTurn);
+//         displayRolledNumber(diceRollTotal, diceRollTotalB);
+//         if (diceRollTotal === "nothing" && diceRollTotalB === "nothing") {
+//           resetScore();
+//         } else if (diceRollTotal === "nothing" || diceRollTotalB === "nothing") {
+//           turnTotal = 0;
+//           holdDice();
+//           return;
+//         } else {
+//           turnTotal += diceRollTotal + diceRollTotalB;
+//           holdDice();
+//         }
+//       }
+//     }
+//   }
+//   else {
+//     if (gameMode === 0) {
+//       let diceRollTotal = rollDice(currentTurn);
+//       displayRolledNumber(diceRollTotal, 0);
+//       for (diceRollTotal = 0; diceRollTotal < 16; diceRollTotal) {
+//         let currentRollTotal = rollDice(currentTurn);
+//         displayRolledNumber(currentRollTotal, 0);
+//         if (currentRollTotal === "nothing") {
+//           turnTotal = 0;
+//           holdDice();
+//           return;
+//         } else {
+//           diceRollTotal += currentRollTotal;
+//           turnTotal = diceRollTotal;
+//         }
+//       }
+//       holdDice();
+//     } else if (gameMode === 1) {
+//       for (combinedDiceTotal = 0; combinedDiceTotal < 23; combinedDiceTotal) {
+//         let currentRollTotalA = rollDice(currentTurn);
+//         let currentRollTotalB = rollDice(currentTurn);
+//         displayRolledNumber(currentRollTotalA, currentRollTotalB);
+//         if (currentRollTotalA === "nothing" && currentRollTotalB === "nothing") {
+//           resetScore();
+//           return;
+//         } else if (currentRollTotalA === "nothing" || currentRollTotalB === "nothing") {
+//           turnTotal = 0;
+//           holdDice();
+//           return;
+//         } else {
+//           combinedDiceTotal += currentRollTotalA + currentRollTotalB;
+//           turnTotal = combinedDiceTotal;
+//         }
+//       }
+//       holdDice();
+//     }
+//   }
+// }
+
+
+
+// // Define Global Variables
+
+// let gameScoreTally = new ScoreTally;
+// let p1Score = new PlayerScore(1, 0)
+// let p2Score = new PlayerScore(2, 0)
+// gameScoreTally.trackScore(p1Score);
+// gameScoreTally.trackScore(p2Score);
+// let currentTurn = 2;
+// let turnTotal = 0;
+// let aiMode = 0;
+// let gameMode = 0;
 
 
 
