@@ -1,6 +1,6 @@
 // Business Logic for PlayerScore constructor
 
-export default function PlayerScore(playerNumber, currentScore) {
+export function PlayerScore(playerNumber, currentScore) {
   this.playerNumber = playerNumber;
   this.currentScore = currentScore;
 }
