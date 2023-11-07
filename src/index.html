@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.cdnfonts.com/css/champigna" rel="stylesheet">
+  <title>Pig Dice</title>
+</head>
+
+<body class="gray">
+  <div id="divTopBanner">
+    <h1>🎲🐷 PIG DICE 🐷🎲</h1>
+    <p id="subTitle">Developed by Hunter Empey & Aaron Mejia</p>
+  </div>
+
+  <div id="divGameOptions">
+    <img src="img/pigjig.gif" alt="pixelated pig walking" id="pigWalker">
+    <form id="gameOptions">
+      <button id="playGame">Play Local Game</button>
+      <button id="playWithAi">Play Vs AI</button>
+      <button id="playWithHardAi">Play Vs Hard AI</button>
+    </form>
+    <form id="gameModeForm" class="form-check form-switch">
+      <label>Standard Pig<input type="radio" name="gameMode" value="normal" class="form-check-input" role="switch" checked></label>
+      <br>
+      <label>Two-Dice Pig<input type="radio" name="gameMode" value="two-dice" class="form-check-input" role="switch"></label>
+    </form>
+  </div>
+
+  <hr>
+
+  <div id="divGame" class="hidden">
+    <br><br>
+    <h3 id="currentPlayerTurn">Please press "Play"</h3>
+    <form id="gameButtons">
+      <button type="diceRoll" id="rollDice">Roll Dice</button>
+      <button type="hold" id="hold">Hold</button>
+    </form>
+    <br>
+    <p id="rolledNumberDisplay"></p>
+    <p id="turnTotalDisplay1"></p>
+    <p id="turnTotalDisplay2"></p>
+
+  </div>
+
+  <div id="divScores" class="hidden">
+    <div id="divScoreP1" class="card" style="width: 250px; margin-left: auto; margin-right: auto;">
+      <h3>Player 1 Score</h3>
+      <hr>
+      <p id="displayScoreP1">none</p>
+    </div>
+    <div id="divScoreP2" class="card" style="width: 250px; margin-left: auto; margin-right: auto;">
+      <h3>Player 2 Score</h3>
+      <hr>
+      <p id="displayScoreP2">none</p>
+    </div>
+    <p id="winMessage"></p>
+  </div>
+
+</body>
+
+</html>

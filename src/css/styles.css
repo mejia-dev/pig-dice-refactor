@@ -1,0 +1,65 @@
+/* Styles for Functional Items */
+
+.hidden {
+  display: none;
+}
+
+
+/* Div Styles */
+#divTopBanner {
+  text-align: center;
+  margin: 1%;
+  font-family: 'Champigna', sans-serif;
+}
+
+#divGameOptions {
+  text-align: left;
+  margin: 1%;
+}
+
+#gameOptions {
+  text-align: center;
+}
+
+#gameModeForm {
+  text-align: center;
+}
+
+#divGame {
+  text-align: center;
+  margin: 1%;
+}
+
+#divScores {
+  text-align: center;
+  margin: 1%;
+}
+
+
+/* Color Styles */
+
+.gray {
+  background-color: gray;
+}
+
+.red {
+  color: rgb(116, 14, 14);
+}
+
+.green {
+  color: rgb(73, 161, 73);
+}
+
+
+/* Animated Styles */
+
+#pigWalker {
+  height: 50px;
+  position: sticky;
+  display: block;
+}
+
+.flipImage {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
