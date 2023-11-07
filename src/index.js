@@ -1,10 +1,31 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { ScoreTally } from './scoreTally.js';
-import { PlayerScore } from './PlayerScore.js';
+import { aiTurn } from './aiTurn.js';
 import { changePlayerTurn } from './changePlayerTurn.js';
+import { checkGameMode } from './checkGameMode.js';
+import { checkWinningConditions } from './checkWinningConditions.js';
+import { holdDice } from './holdDice.js';
+import { PlayerScore } from './PlayerScore.js';
+import { playerTurn } from './playerTurn.js';
+import { resetScore } from './resetScore.js';
+import { rollDice } from './rollDice';
+import { ScoreTally } from './scoreTally.js';
+import { setAiMode } from './setAiMode.js';
 
+
+
+// Define Global Variables
+
+let gameScoreTally = new ScoreTally;
+let p1Score = new PlayerScore(1, 0);
+let p2Score = new PlayerScore(2, 0);
+gameScoreTally.trackScore(p1Score);
+gameScoreTally.trackScore(p2Score);
+let currentTurn = 2;
+let turnTotal = 0;
+let aiMode = 0;
+let gameMode = 0;
 
 // UI Logic
 
